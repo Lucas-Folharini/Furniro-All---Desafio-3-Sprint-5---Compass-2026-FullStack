@@ -8,6 +8,7 @@ import { errorHandler } from './shared/middlewares/error-handler';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocument } from './docs/swagger';
 import { corsMiddleware } from './shared/middlewares/cors';
+import { authRoutes } from './routes/auth.routes';
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
@@ -18,6 +19,9 @@ app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/images', express.static(path.resolve(__dirname, '../public/images')));
 app.use('/products', productsRoutes);
+
+app.use('/auth', authRoutes);
+
 
 app.use(errorHandler);
 
