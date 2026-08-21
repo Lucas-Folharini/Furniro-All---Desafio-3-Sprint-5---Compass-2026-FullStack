@@ -1,0 +1,189 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "slug": "syltherine",
+      "sku": "FUR-DIN-001",
+      "name": "Syltherine",
+      "category": "dining",
+      "price": 3500000,
+      "discount": 30,
+      "isNew": false,
+      "image": "prod-1.jpeg",
+      "description": "Stylish cafe chair",
+      "complementaryDescription": "A comfortable chair with a contemporary silhouette, suitable for dining rooms and cafes.",
+      "additionalInfo": "Structure: solid wood. Upholstery: polyester. Indoor use only.",
+      "colors": [
+        { "name": "Beige", "value": "#F5F0E6", "priceModifier": 0 },
+        { "name": "Gray", "value": "#9CA3AF", "priceModifier": 0 },
+        { "name": "Black", "value": "#111827", "priceModifier": 150000 }
+      ],
+      "sizes": [
+        { "name": "S", "priceModifier": 0 },
+        { "name": "M", "priceModifier": 100000 },
+        { "name": "L", "priceModifier": 250000 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 2,
+      "slug": "leviosa",
+      "sku": "FUR-DIN-002",
+      "name": "Leviosa",
+      "category": "dining",
+      "price": 2500000,
+      "discount": 0,
+      "isNew": false,
+      "image": "prod-2.jpeg",
+      "description": "Stylish cafe chair",
+      "complementaryDescription": "A lightweight dining chair designed for everyday comfort.",
+      "additionalInfo": "Structure: engineered wood. Maximum supported weight: 120 kg.",
+      "colors": [
+        { "name": "White", "value": "#FFFFFF", "priceModifier": 0 },
+        { "name": "Beige", "value": "#F5F0E6", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "M", "priceModifier": 0 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 3,
+      "slug": "lolito",
+      "sku": "FUR-LIV-001",
+      "name": "Lolito",
+      "category": "living",
+      "price": 14000000,
+      "discount": 50,
+      "isNew": false,
+      "image": "prod-3.jpeg",
+      "description": "Luxury big sofa",
+      "complementaryDescription": "A spacious sofa with deep seats and soft upholstery for a relaxed living room.",
+      "additionalInfo": "Seats: 4. Structure: hardwood. Removable cushion covers.",
+      "colors": [
+        { "name": "Gray", "value": "#9CA3AF", "priceModifier": 0 },
+        { "name": "Navy", "value": "#1E3A8A", "priceModifier": 500000 },
+        { "name": "Beige", "value": "#F5F0E6", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "L", "priceModifier": 0 },
+        { "name": "XL", "priceModifier": 1500000 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 4,
+      "slug": "respira",
+      "sku": "FUR-DIN-003",
+      "name": "Respira",
+      "category": "dining",
+      "price": 500000,
+      "discount": 0,
+      "isNew": true,
+      "image": "prod-4.jpeg",
+      "description": "Outdoor bar table and stool",
+      "complementaryDescription": "Compact outdoor furniture for balconies, gardens and entertaining areas.",
+      "additionalInfo": "Powder-coated steel. Weather-resistant finish. Set with 1 table and 2 stools.",
+      "colors": [
+        { "name": "Black", "value": "#111827", "priceModifier": 0 },
+        { "name": "Green", "value": "#2EC1AC", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "M", "priceModifier": 0 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 5,
+      "slug": "grifo",
+      "sku": "FUR-BED-001",
+      "name": "Grifo",
+      "category": "bedroom",
+      "price": 1500000,
+      "discount": 0,
+      "isNew": false,
+      "image": "prod-5.jpeg",
+      "description": "Night lamp",
+      "complementaryDescription": "A warm bedside light with a minimalist profile.",
+      "additionalInfo": "Voltage: bivolt. Bulb socket: E27. Bulb not included.",
+      "colors": [
+        { "name": "Gold", "value": "#D4AF37", "priceModifier": 50000 },
+        { "name": "Black", "value": "#111827", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "S", "priceModifier": 0 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 6,
+      "slug": "muggo",
+      "sku": "FUR-LIV-002",
+      "name": "Muggo",
+      "category": "living",
+      "price": 150000,
+      "discount": 0,
+      "isNew": true,
+      "image": "prod-6.jpeg",
+      "description": "Small mug",
+      "complementaryDescription": "A simple ceramic mug for coffee, tea and decorative compositions.",
+      "additionalInfo": "Capacity: 250 ml. Dishwasher and microwave safe.",
+      "colors": [
+        { "name": "White", "value": "#FFFFFF", "priceModifier": 0 },
+        { "name": "Pink", "value": "#F9A8D4", "priceModifier": 0 },
+        { "name": "Blue", "value": "#60A5FA", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "S", "priceModifier": 0 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 7,
+      "slug": "pingky",
+      "sku": "FUR-BED-002",
+      "name": "Pingky",
+      "category": "bedroom",
+      "price": 14000000,
+      "discount": 50,
+      "isNew": false,
+      "image": "prod-7.jpeg",
+      "description": "Cute bed set",
+      "complementaryDescription": "A coordinated bedroom set with soft fabrics and a playful look.",
+      "additionalInfo": "Includes headboard, bed frame and two bedside tables. Mattress not included.",
+      "colors": [
+        { "name": "Pink", "value": "#F9A8D4", "priceModifier": 0 },
+        { "name": "Beige", "value": "#F5F0E6", "priceModifier": 0 }
+      ],
+      "sizes": [
+        { "name": "queen", "priceModifier": 0 },
+        { "name": "king", "priceModifier": 2000000 }
+      ],
+      "gallery": []
+    },
+    {
+      "id": 8,
+      "slug": "potty",
+      "sku": "FUR-LIV-003",
+      "name": "Potty",
+      "category": "living",
+      "price": 500000,
+      "discount": 0,
+      "isNew": true,
+      "image": "prod-8.jpeg",
+      "description": "Minimalist flower pot",
+      "complementaryDescription": "A clean-lined planter made to complement modern interiors.",
+      "additionalInfo": "Material: ceramic. Drainage hole included. Plant not included.",
+      "colors": [
+        { "name": "White", "value": "#FFFFFF", "priceModifier": 0 },
+        { "name": "Black", "value": "#111827", "priceModifier": 0 },
+        { "name": "Terracotta", "value": "#C65A3A", "priceModifier": 50000 }
+      ],
+      "sizes": [
+        { "name": "S", "priceModifier": 0 },
+        { "name": "M", "priceModifier": 80000 }
+      ],
+      "gallery": []
+    }
+  ]
+}
