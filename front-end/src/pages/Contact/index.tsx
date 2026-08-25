@@ -6,6 +6,10 @@ import toast from "react-hot-toast";
 import { Banner } from "../../components/PageBanner";
 import { FeaturesSection } from "../../components/FeaturesSection";
 
+import addressIcon from '@assets/adress.svg';
+import phoneIcon from '@assets/phone.svg';
+import clockIcon from '@assets/clock.svg';
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required and must be valid"),
   email: z.string().email("Please enter a valid email address"),
@@ -29,9 +33,16 @@ export function Contact() {
     try {
       console.log("Contact Form Data:", data);
       await new Promise((resolve) => setTimeout(resolve, 800));
-
-      // só pra ter um delayzinho, achei melhor visualmente
-      toast.success("Message sent successfully!");
+      toast.success("Message sent successfully!", {
+        style: {
+          background: "#2EC1AC",
+          color: "#fff",
+        },
+        iconTheme: {
+          primary: "#fff",
+          secondary: "#2EC1AC",
+        },
+      });
       reset();
     } catch (error) {
       console.log(error); // TODO tirar dps, debbug
@@ -59,20 +70,15 @@ export function Contact() {
         <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
           {/* LADO ESQUERDO */}
           <div className="flex flex-col gap-10 lg:w-[300px]">
+
+            {/* Address */}
             <div className="flex gap-4">
               <div>
-                <svg
-                  width="22"
-                  height="28"
-                  viewBox="0 0 22 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11 0C4.925 0 0 4.925 0 11C0 19.25 11 28 11 28C11 28 22 19.25 22 11C22 4.925 17.075 0 11 0ZM11 15C8.79 15 7 13.21 7 11C7 8.79 8.79 7 11 7C13.21 7 15 8.79 15 11C15 13.21 13.21 15 11 15Z"
-                    fill="black"
-                  />
-                </svg>
+                <img
+                  src={addressIcon}
+                  alt="Address"
+                  className="w-[22px] h-auto"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-2xl text-black mb-2">Address</h3>
@@ -86,20 +92,11 @@ export function Contact() {
               </div>
             </div>
 
+
+            {/* Phone */}
             <div className="flex gap-4">
               <div>
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21.05 16.27L16.2 15.19C15.84 15.11 15.46 15.21 15.2 15.47L12.06 18.61C9.07 17.09 6.64 14.65 5.12 11.66L8.26 8.52C8.52 8.26 8.62 7.88 8.54 7.52L7.46 2.68C7.36 2.21 6.95 1.88 6.47 1.88H2.81C2.31 1.88 1.88 2.3 1.91 2.81C2.42 12.39 10.15 20.13 19.72 20.64C20.23 20.67 20.65 20.24 20.65 19.74V16.08C20.65 15.6 20.32 15.19 19.85 15.09H21.05Z"
-                    fill="black"
-                  />
-                </svg>
+                <img src={phoneIcon} alt="Phone" className="w-[30px] h-[30px]" />
               </div>
               <div>
                 <h3 className="font-bold text-2xl text-black mb-2">Phone</h3>
@@ -110,21 +107,11 @@ export function Contact() {
                 </p>
               </div>
             </div>
-
+  
+            {/* Working Time */}
             <div className="flex gap-4">
               <div>
-                <svg
-                  width="23"
-                  height="23"
-                  viewBox="0 0 23 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.5 0C5.152 0 0 5.152 0 11.5C0 17.848 5.152 23 11.5 23C17.848 23 23 17.848 23 11.5C23 5.152 17.848 0 11.5 0ZM11.5 20.7C6.4285 20.7 2.3 16.5715 2.3 11.5C2.3 6.4285 6.4285 2.3 11.5 2.3C16.5715 2.3 20.7 6.4285 20.7 11.5C20.7 16.5715 16.5715 20.7 11.5 20.7ZM12.075 5.75H9.775V12.65L15.8125 16.2725L16.9625 14.3865L12.075 11.5V5.75Z"
-                    fill="black"
-                  />
-                </svg>
+                <img src={clockIcon} alt="Clock" className="w-[23px] h-auto" />
               </div>
               <div>
                 <h3 className="font-bold text-2xl text-black mb-2">

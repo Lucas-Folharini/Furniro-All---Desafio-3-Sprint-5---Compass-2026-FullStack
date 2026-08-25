@@ -14,9 +14,14 @@ import { Register } from "@pages/Register";
 // import { Checkout } from './pages/Checkout';
 import { Contact } from "./pages/Contact";
 
+import { Toaster } from 'react-hot-toast';
+
 export default function App() {
   return (
     <>
+
+    <Toaster position="top-right" />
+
       <Header />
 
       <main className="min-h-screen">
