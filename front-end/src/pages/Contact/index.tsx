@@ -3,16 +3,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
 
+import { Banner } from "../../components/PageBanner";
+import { FeaturesSection } from "../../components/FeaturesSection";
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required and must be valid"),
-  email: z.email("Please enter a valid email address"),
+  email: z.string().email("Please enter a valid email address"),
   subject: z.string().optional(),
   message: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-export  function Contact() {
+export function Contact() {
   const {
     register,
     handleSubmit,
@@ -25,10 +28,9 @@ export  function Contact() {
   const onSubmit = async (data: ContactFormData) => {
     try {
       console.log("Contact Form Data:", data);
-
-      // só pra ter um delayzinho, achei melhor visualmente
       await new Promise((resolve) => setTimeout(resolve, 800));
 
+      // só pra ter um delayzinho, achei melhor visualmente
       toast.success("Message sent successfully!");
       reset();
     } catch (error) {
@@ -38,8 +40,11 @@ export  function Contact() {
   };
 
   return (
-    <div className="w-full bg-white font-poppins pb-16">
-      <div className="max-w-screen-xl mx-auto px-5 lg:px-0 pt-16">
+    <div className="w-full bg-white font-poppins">
+      <Banner title="Contact" />
+
+      {/* CONTEÚDO PRINCIPAL */}
+      <div className="max-w-screen-xl mx-auto px-5 lg:px-0 pt-16 pb-16">
         <div className="text-center mb-20">
           <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
             Get In Touch With Us
@@ -51,11 +56,9 @@ export  function Contact() {
           </p>
         </div>
 
-        {/* Container Principal: */}
         <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
-          {/* LADO ESQUERDO  */}
+          {/* LADO ESQUERDO */}
           <div className="flex flex-col gap-10 lg:w-[300px]">
-            {/* Address */}
             <div className="flex gap-4">
               <div>
                 <svg
@@ -83,7 +86,6 @@ export  function Contact() {
               </div>
             </div>
 
-            {/* Phone */}
             <div className="flex gap-4">
               <div>
                 <svg
@@ -109,7 +111,6 @@ export  function Contact() {
               </div>
             </div>
 
-            {/* Working Time */}
             <div className="flex gap-4">
               <div>
                 <svg
@@ -130,11 +131,9 @@ export  function Contact() {
                   Working Time
                 </h3>
                 <p className="text-black text-base leading-relaxed">
-                  Monday-Friday: 9:00 -<br />
-                  22:00
+                  Monday-Friday: 9:00 - 22:00
                   <br />
-                  Saturday-Sunday: 9:00 -<br />
-                  21:00
+                  Saturday-Sunday: 9:00 - 21:00
                 </p>
               </div>
             </div>
@@ -146,7 +145,6 @@ export  function Contact() {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-9"
             >
-              {/* Your Name */}
               <div className="flex flex-col gap-5">
                 <label className="font-medium text-black">Your name</label>
                 <div className="relative">
@@ -164,7 +162,6 @@ export  function Contact() {
                 </div>
               </div>
 
-              {/* Email address */}
               <div className="flex flex-col gap-5">
                 <label className="font-medium text-black">Email address</label>
                 <div className="relative">
@@ -182,7 +179,6 @@ export  function Contact() {
                 </div>
               </div>
 
-              {/* Subject */}
               <div className="flex flex-col gap-5">
                 <label className="font-medium text-black">Subject</label>
                 <input
@@ -193,7 +189,6 @@ export  function Contact() {
                 />
               </div>
 
-              {/* Message */}
               <div className="flex flex-col gap-5">
                 <label className="font-medium text-black">Message</label>
                 <textarea
@@ -204,7 +199,6 @@ export  function Contact() {
                 />
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -216,6 +210,8 @@ export  function Contact() {
           </div>
         </div>
       </div>
+
+      <FeaturesSection />
     </div>
   );
 }
