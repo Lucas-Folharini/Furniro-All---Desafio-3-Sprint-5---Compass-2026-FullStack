@@ -1,17 +1,36 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from "@assets/logo.svg";
 import iconCart from "@assets/iconCart.svg";
 import iconProfile from "@assets/iconProfile.svg";
 import { useCartStore } from "@store/useCartStore";
+import { useAuthStore } from "@store/useAuthStore";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false); 
+
   const hasCartItems = useCartStore((state) => state.items.length > 0);
+  const { token, logout } = useAuthStore(); 
+  const navigate = useNavigate();
 
   function closeMenu() {
     setIsMenuOpen(false);
+  }
+
+  function handleProfileClick() {
+    if (!token) {
+      navigate("/login");
+    } else {
+      setIsProfileOpen((prev) => !prev);
+    }
+  }
+
+  function handleLogout() {
+    logout();
+    setIsProfileOpen(false);
+    closeMenu();
   }
 
   return (
@@ -40,17 +59,11 @@ export function Header() {
               MENU DESKTOP
           ========================================= */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-[75px] font-poppins font-medium text-[#000000] text-base">
-            <Link
-              to="/"
-              className="hover:text-[#B88E2F] transition-colors"
-            >
+            <Link to="/" className="hover:text-[#B88E2F] transition-colors">
               Home
             </Link>
 
-            <Link
-              to="/shop"
-              className="hover:text-[#B88E2F] transition-colors"
-            >
+            <Link to="/shop" className="hover:text-[#B88E2F] transition-colors">
               Shop
             </Link>
 
@@ -62,10 +75,7 @@ export function Header() {
               About
             </a>
 
-            <Link
-              to="/contact"
-              className="hover:text-[#B88E2F] transition-colors"
-            >
+            <Link to="/contact" className="hover:text-[#B88E2F] transition-colors">
               Contact
             </Link>
           </nav>
@@ -74,11 +84,26 @@ export function Header() {
               AÇÕES
           ========================================= */}
           <div className="flex flex-1 items-center justify-end gap-5 lg:gap-[35px] text-[#000000]">
-            <img
-              src={iconProfile}
-              alt="Perfil"
-              className="w-6 lg:w-auto cursor-pointer hover:opacity-75 transition-opacity"
-            />
+            
+            <div className="relative">
+              <img
+                src={iconProfile}
+                alt="Perfil"
+                onClick={handleProfileClick}
+                className="w-6 lg:w-auto cursor-pointer hover:opacity-75 transition-opacity"
+              />
+
+              {isProfileOpen && token && (
+                <div className="absolute right-0 mt-3 w-28 bg-white border border-gray-100 rounded-md shadow-lg flex flex-col z-50">
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-3 text-left hover:bg-gray-50 hover:text-[#B88E2F] font-poppins text-sm text-black transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
 
             <Link to="/cart" className="relative">
               <img
@@ -137,28 +162,17 @@ export function Header() {
         }`}
       >
         <div className="flex justify-end p-5">
-          <button
-            onClick={closeMenu}
-            className="text-3xl hover:text-[#B88E2F]"
-          >
+          <button onClick={closeMenu} className="text-3xl hover:text-[#B88E2F]">
             ×
           </button>
         </div>
 
         <nav className="flex flex-col px-8 gap-8 font-poppins text-lg">
-          <Link
-            to="/"
-            onClick={closeMenu}
-            className="hover:text-[#B88E2F]"
-          >
+          <Link to="/" onClick={closeMenu} className="hover:text-[#B88E2F]">
             Home
           </Link>
 
-          <Link
-            to="/shop"
-            onClick={closeMenu}
-            className="hover:text-[#B88E2F]"
-          >
+          <Link to="/shop" onClick={closeMenu} className="hover:text-[#B88E2F]">
             Shop
           </Link>
 
@@ -173,30 +187,28 @@ export function Header() {
             About
           </a>
 
-          <Link
-            to="/contact"
-            onClick={closeMenu}
-            className="hover:text-[#B88E2F]"
-          >
+          <Link to="/contact" onClick={closeMenu} className="hover:text-[#B88E2F]">
             Contact
           </Link>
 
           <hr />
 
-          <Link
-            to="/cart"
-            onClick={closeMenu}
-            className="relative w-fit hover:text-[#B88E2F]"
-          >
+          <Link to="/cart" onClick={closeMenu} className="relative w-fit hover:text-[#B88E2F]">
             Cart
             {hasCartItems && (
               <span className="absolute -right-4 top-1 h-2.5 w-2.5 rounded-full bg-red-500" />
             )}
           </Link>
 
-          <button className="text-left hover:text-[#B88E2F]">
-            Profile
-          </button>
+          {token ? (
+            <button onClick={handleLogout} className="text-left hover:text-red-500 transition-colors">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" onClick={closeMenu} className="hover:text-[#B88E2F]">
+              Login / Register
+            </Link>
+          )}
         </nav>
       </aside>
     </>
