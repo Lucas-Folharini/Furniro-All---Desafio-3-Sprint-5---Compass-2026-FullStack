@@ -12,7 +12,7 @@ import { ProductDetail } from "./pages/ProductDetail";
 import { Login } from "./pages/Login";
 import { Register } from "@pages/Register";
 // import { Checkout } from './pages/Checkout';
-// import { Contact } from './pages/Contact';
+import { Contact } from './pages/Contact';
 
 export default function App() {
   return (
@@ -33,7 +33,7 @@ export default function App() {
           {/* ROTAS PROTEGIDAS */}
           <Route element={<ProtectedRoute />}>
             {/* <Route path="/checkout" element={<Checkout />} /> */}
-            {/* <Route path="/contact" element={<Contact />} /> */}
+            <Route path="/contact" element={<Contact />} />
           </Route>
         </Routes>
       </main>
