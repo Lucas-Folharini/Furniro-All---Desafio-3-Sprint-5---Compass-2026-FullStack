@@ -1,19 +1,19 @@
 import 'reflect-metadata';
 import express from 'express';
 import path from 'node:path';
+import cors from 'cors'; 
 import { AppDataSource } from './database/data-source';
 import { productsRoutes } from './routes/products.routes';
 import { seedProducts } from './database/seed';
 import { errorHandler } from './shared/middlewares/error-handler';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocument } from './docs/swagger';
-import { corsMiddleware } from './shared/middlewares/cors';
 import { authRoutes } from './routes/auth.routes';
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
 
-app.use(corsMiddleware);
+app.use(cors()); 
 app.use(express.json());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

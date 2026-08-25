@@ -1,5 +1,4 @@
-export const API_BASE_URL = "http://localhost:3000";
-
+export const API_BASE_URL = "/api";
 type ApiFetchOptions = RequestInit & { params?: object };
 
 export async function apiFetch<T>(
@@ -9,7 +8,10 @@ export async function apiFetch<T>(
   const { params, ...requestOptions } = options ?? {};
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
-  const url = new URL(`${API_BASE_URL}${normalizedPath}`);
+  const url = new URL(
+    `${API_BASE_URL}${normalizedPath}`,
+    window.location.origin,
+  );
 
   if (params) {
     for (const [key, value] of Object.entries(params)) {
