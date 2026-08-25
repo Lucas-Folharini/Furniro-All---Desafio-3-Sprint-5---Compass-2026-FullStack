@@ -12,11 +12,16 @@ import { ProductDetail } from "./pages/ProductDetail";
 import { Login } from "./pages/Login";
 import { Register } from "@pages/Register";
 // import { Checkout } from './pages/Checkout';
-// import { Contact } from './pages/Contact';
+import { Contact } from "./pages/Contact";
+
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
     <>
+
+    <Toaster position="top-right" />
+
       <Header />
 
       <main className="min-h-screen">
@@ -27,13 +32,11 @@ export default function App() {
           <Route path="/shop/:id" element={<ProductDetail />} />{" "}
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register/>} />
-
-
+          <Route path="/register" element={<Register />} />
           {/* ROTAS PROTEGIDAS */}
           <Route element={<ProtectedRoute />}>
             {/* <Route path="/checkout" element={<Checkout />} /> */}
-            {/* <Route path="/contact" element={<Contact />} /> */}
+            <Route path="/contact" element={<Contact />} />
           </Route>
         </Routes>
       </main>
