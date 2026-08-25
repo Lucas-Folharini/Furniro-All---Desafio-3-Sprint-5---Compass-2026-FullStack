@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuthStore } from "../../store/useAuthStore";
 import { authApi } from "../../api/auth";
@@ -10,35 +10,45 @@ import logo from "../../assets/logo.svg";
 export function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const location = useLocation();
 
   const navigate = useNavigate();
   const setToken = useAuthStore((state) => state.setToken);
+  const from = location.state?.from || "/";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await authApi.login(formData) as { token: string };
-      
+      const response = (await authApi.login(formData)) as { token: string };
+
       setToken(response.token);
-      toast.success('Login successful!');
-      navigate('/');
-    } catch (error) {
-      console.error('Login error:', error); // TODO remover dps, apenas debbug
-      toast.error('Invalid credentials.');
+      toast.success("Login successful!", { style: {
+          background: "#2EC1AC",
+          color: "#fff",
+        },
+        iconTheme: {
+          primary: "#fff",
+          secondary: "#2EC1AC",
+        }});
+      navigate(from, { replace: true });
+    } catch{
+      toast.error("Invalid credentials.", {
+        style: { background: "#E97171", color: "#fff" },
+        iconTheme: { primary: "#fff", secondary: "#E97171" },
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
   // TODO conferir a responsibilidade
-  return ( 
+  return (
     <div className="flex min-h-[80vh] w-full bg-white font-sans">
       <div
         className="hidden md:block w-1/2 bg-cover bg-center"

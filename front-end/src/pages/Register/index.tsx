@@ -6,7 +6,7 @@ import { authApi } from "../../api/auth";
 import loginImage from "../../assets/login-hero.svg";
 import logo from "../../assets/logo.svg";
 
-export  function Register() {
+export function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -20,29 +20,43 @@ export  function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async () => {
-    
+  const onSubmit = async (e: React.SubmitEvent) => {
+    e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match!');
+      toast.error("Passwords do not match!", {
+        style: { background: "#E97171", color: "#fff" },
+        iconTheme: { primary: "#fff", secondary: "#E97171" },
+      });
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const nameFallback = formData.email.split('@')[0];
-      
+      const nameFallback = formData.email.split("@")[0];
+
       await authApi.register({
         name: nameFallback,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
-      
-      toast.success('Account created! Please log in.');
-      navigate('/login');
-    } catch (error) {
-      console.error('Register error:', error); // TODO remover dps tmb
-      toast.error('Error creating account.');
+
+      toast.success("Account created! Please log in.", {
+        style: {
+          background: "#2EC1AC",
+          color: "#fff",
+        },
+        iconTheme: {
+          primary: "#fff",
+          secondary: "#2EC1AC",
+        },
+      });
+      navigate("/login");
+    } catch {
+      toast.error("Error creating account.", {
+        style: { background: "#E97171", color: "#fff" },
+        iconTheme: { primary: "#fff", secondary: "#E97171" },
+      });
     } finally {
       setIsSubmitting(false);
     }
