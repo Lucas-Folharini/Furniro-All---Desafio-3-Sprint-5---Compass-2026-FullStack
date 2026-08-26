@@ -6,8 +6,11 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
+  isOpen: boolean;
+  openSidebar: () => void;
+  closeSidebar: () => void;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
@@ -18,9 +21,11 @@ export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       items: [],
+      isOpen: false, 
+      openSidebar: () => set({ isOpen: true }),
+      closeSidebar: () => set({ isOpen: false }),
 
       addItem: (product, quantity = 1) => {
-        // Usar set((state) => ...) garante 100% que estamos pegando a lista atualizada
         set((state) => {
           const existingItem = state.items.find(
             (item) => item.id === product.id,
@@ -59,14 +64,15 @@ export const useCartStore = create<CartState>()(
       },
     }),
     {
-      name: "shopping-cart-storage", // Nome que ficará no LocalStorage
+      name: "shopping-cart-storage", 
+      partialize: (state) => ({ items: state.items }), 
     },
   ),
 );
 
+
 if (typeof window !== "undefined") {
   window.addEventListener("storage", (event) => {
-    
     if (event.key === "shopping-cart-storage") {
       useCartStore.persist.rehydrate();
     }

@@ -8,11 +8,12 @@ import { useCartStore } from "@store/useCartStore";
 import { useAuthStore } from "@store/useAuthStore";
 
 export function Header() {
+  const openSidebar = useCartStore((state) => state.openSidebar);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false); 
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const hasCartItems = useCartStore((state) => state.items.length > 0);
-  const { token, logout } = useAuthStore(); 
+  const { token, logout } = useAuthStore();
   const navigate = useNavigate();
 
   function closeMenu() {
@@ -35,11 +36,9 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-[999] w-full bg-white transition-all flex justify-center shadow-sm h-[100px]">
+      <header className="fixed top-0 left-0 z-[90] w-full bg-white transition-all flex justify-center shadow-sm h-[100px]">
         <div className="w-full max-w-[1183px] px-5 lg:px-0 flex items-center justify-between h-full">
-          {/* =========================================
-              LOGO
-          ========================================= */}
+
           <Link
             to="/"
             className="flex flex-1 items-center justify-start relative focus:outline-none"
@@ -55,9 +54,6 @@ export function Header() {
             </span>
           </Link>
 
-          {/* =========================================
-              MENU DESKTOP
-          ========================================= */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-[75px] font-poppins font-medium text-[#000000] text-base">
             <Link to="/" className="hover:text-[#B88E2F] transition-colors">
               Home
@@ -75,16 +71,15 @@ export function Header() {
               About
             </a>
 
-            <Link to="/contact" className="hover:text-[#B88E2F] transition-colors">
+            <Link
+              to="/contact"
+              className="hover:text-[#B88E2F] transition-colors"
+            >
               Contact
             </Link>
           </nav>
 
-          {/* =========================================
-              AÇÕES
-          ========================================= */}
           <div className="flex flex-1 items-center justify-end gap-5 lg:gap-[35px] text-[#000000]">
-            
             <div className="relative">
               <img
                 src={iconProfile}
@@ -105,7 +100,7 @@ export function Header() {
               )}
             </div>
 
-            <Link to="/cart" className="relative">
+            <button onClick={openSidebar} className="relative">
               <img
                 src={iconCart}
                 alt="Carrinho"
@@ -115,11 +110,8 @@ export function Header() {
               {hasCartItems && (
                 <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white" />
               )}
-            </Link>
+            </button>
 
-            {/* =========================================
-                BOTÃO HAMBURGER
-            ========================================= */}
             <button
               onClick={() => setIsMenuOpen(true)}
               className="md:hidden flex items-center justify-center p-1 hover:text-[#B88E2F] transition-colors"
@@ -143,21 +135,15 @@ export function Header() {
         </div>
       </header>
 
-      {/* =========================================
-          OVERLAY
-      ========================================= */}
       <div
         onClick={closeMenu}
-        className={`fixed inset-0 bg-black/40 z-[998] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/40 z-[70] transition-opacity duration-300 md:hidden ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       />
 
-      {/* =========================================
-          MENU MOBILE
-      ========================================= */}
       <aside
-        className={`fixed top-0 right-0 h-screen w-72 bg-white shadow-xl z-[999] transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 h-screen w-72 bg-white shadow-xl z-[90] transition-transform duration-300 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -187,13 +173,21 @@ export function Header() {
             About
           </a>
 
-          <Link to="/contact" onClick={closeMenu} className="hover:text-[#B88E2F]">
+          <Link
+            to="/contact"
+            onClick={closeMenu}
+            className="hover:text-[#B88E2F]"
+          >
             Contact
           </Link>
 
           <hr />
 
-          <Link to="/cart" onClick={closeMenu} className="relative w-fit hover:text-[#B88E2F]">
+          <Link
+            to="/cart"
+            onClick={closeMenu}
+            className="relative w-fit hover:text-[#B88E2F]"
+          >
             Cart
             {hasCartItems && (
               <span className="absolute -right-4 top-1 h-2.5 w-2.5 rounded-full bg-red-500" />
@@ -201,11 +195,18 @@ export function Header() {
           </Link>
 
           {token ? (
-            <button onClick={handleLogout} className="text-left hover:text-red-500 transition-colors">
+            <button
+              onClick={handleLogout}
+              className="text-left hover:text-red-500 transition-colors"
+            >
               Logout
             </button>
           ) : (
-            <Link to="/login" onClick={closeMenu} className="hover:text-[#B88E2F]">
+            <Link
+              to="/login"
+              onClick={closeMenu}
+              className="hover:text-[#B88E2F]"
+            >
               Login / Register
             </Link>
           )}
