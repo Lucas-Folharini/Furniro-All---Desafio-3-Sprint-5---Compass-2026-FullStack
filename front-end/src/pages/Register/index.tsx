@@ -61,8 +61,6 @@ export function Register() {
       setIsSubmitting(false);
     }
   };
-
-  // TODO conferir a responsibilidade depois
   return (
     <div className="flex min-h-[80vh] w-full bg-white font-sans">
       <div
@@ -162,7 +160,6 @@ export function Register() {
             </button>
           </form>
 
-          {/* TODO perguntar para o rauny se está tudo bem esse link de retorno */}
           <div className="mt-8 text-sm text-black">
             Already registered?{" "}
             <Link to="/login" className="font-bold hover:underline">
