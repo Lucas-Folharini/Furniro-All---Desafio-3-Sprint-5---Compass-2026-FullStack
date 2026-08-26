@@ -15,6 +15,7 @@ import { Checkout } from './pages/Checkout';
 import { Contact } from "./pages/Contact";
 
 import { Toaster } from 'react-hot-toast';
+import { CartSidebar } from "@components/CartSidebar";
 
 export default function App() {
   return (
@@ -41,6 +42,8 @@ export default function App() {
           </Route>
         </Routes>
       </main>
+
+      <CartSidebar />
 
       <Footer />
     </>
