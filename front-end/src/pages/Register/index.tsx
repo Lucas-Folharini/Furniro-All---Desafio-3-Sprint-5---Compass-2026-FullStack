@@ -82,7 +82,6 @@ export function Register() {
                 onChange={handleChange}
                 type="email"
                 placeholder="email"
-                required
                 className="w-full bg-[#E8E8E8] text-black font-bold placeholder-black py-4 pl-4 pr-12 outline-none"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -109,7 +108,6 @@ export function Register() {
                 onChange={handleChange}
                 type="password"
                 placeholder="password"
-                required
                 className="w-full bg-[#E8E8E8] text-black font-bold placeholder-black py-4 pl-4 pr-12 outline-none"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer">
@@ -136,7 +134,6 @@ export function Register() {
                 onChange={handleChange}
                 type="password"
                 placeholder="confirm password"
-                required
                 className="w-full bg-[#E8E8E8] text-black font-bold placeholder-black py-4 pl-4 pr-12 outline-none"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer">
