@@ -17,9 +17,9 @@ export function BrowseRange() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-[1183px] px-5 lg:px-0">
-    
+          {/* DINING */}
           <div className="flex flex-col items-center gap-[30px]">
-            <Link to="/shop/dining" className="w-full">
+            <Link to="/shop?category=Dining" className="w-full">
               <img
                 src={diningImg}
                 alt="Dining Room Setup"
@@ -31,24 +31,21 @@ export function BrowseRange() {
             </h3>
           </div>
 
-       
           <div className="flex flex-col items-center gap-[30px]">
-            <Link to="/shop/living" className="w-full">
+            <Link to="/shop?category=Living" className="w-full">
               <img
                 src={livingImg}
                 alt="Living Room Setup"
                 className="w-full rounded-[10px] object-cover transition-transform hover:scale-105 cursor-pointer"
               />
             </Link>
-
             <h3 className="font-poppins font-semibold text-[24px] text-[#333333]">
               Living
             </h3>
           </div>
 
-        
           <div className="flex flex-col items-center gap-[30px]">
-            <Link to="/shop/bedroom" className="w-full">
+            <Link to="/shop?category=Bedroom" className="w-full">
               <img
                 src={bedroomImg}
                 alt="Bedroom Setup"
