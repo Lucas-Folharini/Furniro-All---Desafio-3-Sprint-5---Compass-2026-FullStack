@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { Banner } from "@components/PageBanner";
 import { FeaturesSection } from "@components/FeaturesSection";
@@ -6,15 +6,19 @@ import { FeaturesSection } from "@components/FeaturesSection";
 import { ProductsSection } from "./sections/ProductsSection";
 
 export function Shop() {
-  const { category = "" } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const categoryFilter = searchParams.get("category") || "";
 
   return (
     <div className="w-full min-h-screen bg-white">
       <main>
-        <Banner title="Shop" />
-        
-        <ProductsSection key={category || "all"} category={category} />
-        
+        <Banner title={categoryFilter ? categoryFilter : "Shop"} />
+
+        <ProductsSection
+          key={categoryFilter || "all"}
+          category={categoryFilter}
+        />
         <FeaturesSection />
       </main>
     </div>
