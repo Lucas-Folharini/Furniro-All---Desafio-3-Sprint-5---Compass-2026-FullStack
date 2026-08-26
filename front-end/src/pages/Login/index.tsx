@@ -47,12 +47,11 @@ export function Login() {
     }
   };
 
-  // TODO conferir a responsibilidade
   return (
     <div className="flex min-h-[80vh] w-full bg-white font-sans">
       <div
         className="hidden md:block w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: `url(${loginImage})` }} // TODO arrumar proporção dps, ou perguntar se está correto no figma msm. No /register tmb
+        style={{ backgroundImage: `url(${loginImage})` }}
       />
       <div className="w-full md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-[360px] flex flex-col items-center">

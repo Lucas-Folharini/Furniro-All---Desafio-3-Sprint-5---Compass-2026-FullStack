@@ -44,8 +44,7 @@ export function Contact() {
         },
       });
       reset();
-    } catch (error) {
-      console.log(error); // TODO tirar dps, debbug
+    } catch {
       toast.error("Failed to send message. Please try again.");
     }
   };
@@ -54,7 +53,6 @@ export function Contact() {
     <div className="w-full bg-white font-poppins">
       <Banner title="Contact" />
 
-      {/* CONTEÚDO PRINCIPAL */}
       <div className="max-w-screen-xl mx-auto px-5 lg:px-0 pt-16 pb-16">
         <div className="text-center mb-20">
           <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
@@ -68,10 +66,10 @@ export function Contact() {
         </div>
 
         <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
-          {/* LADO ESQUERDO */}
+        
           <div className="flex flex-col gap-10 lg:w-[300px]">
 
-            {/* Address */}
+         
             <div className="flex gap-4">
               <div>
                 <img
@@ -93,7 +91,7 @@ export function Contact() {
             </div>
 
 
-            {/* Phone */}
+        
             <div className="flex gap-4">
               <div>
                 <img src={phoneIcon} alt="Phone" className="w-[30px] h-[30px]" />
@@ -108,7 +106,7 @@ export function Contact() {
               </div>
             </div>
   
-            {/* Working Time */}
+         
             <div className="flex gap-4">
               <div>
                 <img src={clockIcon} alt="Clock" className="w-[23px] h-auto" />
@@ -126,7 +124,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* LADO DIREITO */}
+        
           <div className="lg:w-[530px] pt-4 lg:pt-0">
             <form
               onSubmit={handleSubmit(onSubmit)}

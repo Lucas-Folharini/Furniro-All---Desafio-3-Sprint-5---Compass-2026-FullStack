@@ -20,8 +20,6 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
   if (!authHeader) {
     throw new HttpException(401, 'Token is missing', error);
   }
-
-  // separar o token do 'Bearer'
   const [, token] = authHeader.split(' ');
 
   if (!token) {
