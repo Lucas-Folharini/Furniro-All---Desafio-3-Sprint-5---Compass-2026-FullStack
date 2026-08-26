@@ -18,12 +18,12 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    throw new HttpException(401, 'Token is missing', error);
+    throw new HttpException(401, 'Token is missing');
   }
   const [, token] = authHeader.split(' ');
 
   if (!token) {
-    throw new HttpException(401, 'Token is missing or malformed', error);
+    throw new HttpException(401, 'Token is missing or malformed');
   }
 
   try {
@@ -31,6 +31,6 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
     req.user = decoded;
     next();
   } catch (error) {
-    throw new HttpException(401, 'Invalid or expired token', error);
+    throw new HttpException(401, 'Invalid or expired token');
   }
 }
