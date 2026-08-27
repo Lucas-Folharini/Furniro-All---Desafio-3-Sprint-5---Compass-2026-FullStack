@@ -10,7 +10,7 @@ import linkedinIcon from "@assets/linkedin.svg";
 export function Footer() {
   const [email, setEmail] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubscribe = (e: React.SubmitEvent) => {
     e.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
