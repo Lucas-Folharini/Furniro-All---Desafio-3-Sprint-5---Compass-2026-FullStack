@@ -76,16 +76,32 @@ export function Checkout() {
         setValue("city", data.localidade, { shouldValidate: true });
         setValue("province", data.uf, { shouldValidate: true });
         setValue("country", "Brasil", { shouldValidate: true });
-        toast.success("Address found automatically!", { duration: 2000 });
+        toast.success("Address found automatically!", {
+          duration: 2000,
+          style: {
+            background: "#2EC1AC",
+            color: "#fff",
+          },
+          iconTheme: {
+            primary: "#fff",
+            secondary: "#2EC1AC",
+          },
+        });
       } else {
-        toast.error("CEP not found! Please fill manually.");
+        toast.error("CEP not found! Please fill manually.", {
+          style: { background: "#E97171", color: "#fff" },
+          iconTheme: { primary: "#fff", secondary: "#E97171" },
+        });
       }
     }
   };
 
   const onSubmit = async (data: CheckoutFormData) => {
     if (items.length === 0) {
-      toast.error("Your cart is empty!");
+      toast.error("Your cart is empty!", {
+        style: { background: "#E97171", color: "#fff" },
+        iconTheme: { primary: "#fff", secondary: "#E97171" },
+      });
       return;
     }
 
@@ -94,10 +110,22 @@ export function Checkout() {
 
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      toast.success("Order placed successfully!");
+      toast.success("Order placed successfully!", {
+        style: {
+          background: "#2EC1AC",
+          color: "#fff",
+        },
+        iconTheme: {
+          primary: "#fff",
+          secondary: "#2EC1AC",
+        },
+      });
       clearCart();
     } catch {
-      toast.error("Error placing order.");
+      toast.error("Error placing order.", {
+        style: { background: "#E97171", color: "#fff" },
+        iconTheme: { primary: "#fff", secondary: "#E97171" },
+      });
     }
   };
 
