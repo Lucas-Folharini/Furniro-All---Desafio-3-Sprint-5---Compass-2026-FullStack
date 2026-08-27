@@ -134,7 +134,7 @@ export function ProductDetailsSection() {
             {product.badge && (
               <span
                 style={{ backgroundColor: product.badgeColor || "#E97171" }}
-                className="absolute top-5 right-5 text-white text-xs font-bold px-3 py-1 rounded-full"
+                className="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-sm z-10 "
               >
                 {product.badge}
               </span>

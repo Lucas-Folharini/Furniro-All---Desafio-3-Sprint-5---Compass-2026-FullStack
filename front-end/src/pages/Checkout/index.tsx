@@ -17,7 +17,7 @@ const checkoutSchema = z.object({
   city: z.string().min(2, "Town / City is required"),
   province: z.string().min(2, "Province is required"),
   addonAddress: z.string().optional(),
-  email: z.string("Invalid email address"),
+  email: z.email("Invalid email address"),
   additionalInfo: z.string().optional(),
   paymentMethod: z.enum(["bank_transfer", "cash_on_delivery"], {
     message: "Please select a payment method",
@@ -91,7 +91,7 @@ export function Checkout() {
 
     try {
       console.log("Order Data:", data, "Items:", items);
-     
+
       await new Promise((resolve) => setTimeout(resolve, 800));
 
       toast.success("Order placed successfully!");
@@ -116,12 +116,12 @@ export function Checkout() {
             </h2>
 
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-[453px]">
                 <div className="flex flex-col gap-3 w-full">
                   <label className="font-medium text-black">First Name</label>
                   <input
                     {...register("firstName")}
-                    className={`border ${errors.firstName ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                    className={`w-full h-[75px] border ${errors.firstName ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                   />
                   {errors.firstName && (
                     <span className="text-red-500 text-sm">
@@ -133,7 +133,7 @@ export function Checkout() {
                   <label className="font-medium text-black">Last Name</label>
                   <input
                     {...register("lastName")}
-                    className={`border ${errors.lastName ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                    className={`w-full h-[75px] border ${errors.lastName ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                   />
                   {errors.lastName && (
                     <span className="text-red-500 text-sm">
@@ -149,7 +149,7 @@ export function Checkout() {
                 </label>
                 <input
                   {...register("companyName")}
-                  className="border border-[#9F9F9F] rounded-[10px] p-[20px] outline-none focus:border-black"
+                  className="w-full lg:w-[453px] h-[75px] border border-[#9F9F9F] rounded-[10px] px-5 outline-none focus:border-black"
                 />
               </div>
 
@@ -161,7 +161,7 @@ export function Checkout() {
                     register("zipCode").onBlur(e);
                     handleCepBlur(e);
                   }}
-                  className={`border ${errors.zipCode ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.zipCode ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.zipCode && (
                   <span className="text-red-500 text-sm">
@@ -176,7 +176,7 @@ export function Checkout() {
                 </label>
                 <input
                   {...register("country")}
-                  className={`border ${errors.country ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.country ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.country && (
                   <span className="text-red-500 text-sm">
@@ -189,7 +189,7 @@ export function Checkout() {
                 <label className="font-medium text-black">Street address</label>
                 <input
                   {...register("streetAddress")}
-                  className={`border ${errors.streetAddress ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.streetAddress ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.streetAddress && (
                   <span className="text-red-500 text-sm">
@@ -202,7 +202,7 @@ export function Checkout() {
                 <label className="font-medium text-black">Town / City</label>
                 <input
                   {...register("city")}
-                  className={`border ${errors.city ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.city ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.city && (
                   <span className="text-red-500 text-sm">
@@ -215,7 +215,7 @@ export function Checkout() {
                 <label className="font-medium text-black">Province</label>
                 <input
                   {...register("province")}
-                  className={`border ${errors.province ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.province ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.province && (
                   <span className="text-red-500 text-sm">
@@ -228,7 +228,7 @@ export function Checkout() {
                 <label className="font-medium text-black">Add-on address</label>
                 <input
                   {...register("addonAddress")}
-                  className="border border-[#9F9F9F] rounded-[10px] p-[20px] outline-none focus:border-black"
+                  className="w-full lg:w-[453px] h-[75px] border border-[#9F9F9F] rounded-[10px] px-5 outline-none focus:border-black"
                 />
               </div>
 
@@ -237,7 +237,7 @@ export function Checkout() {
                 <input
                   {...register("email")}
                   type="email"
-                  className={`border ${errors.email ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] p-[20px] outline-none focus:border-black`}
+                  className={`w-full lg:w-[453px] h-[75px] border ${errors.email ? "border-red-500" : "border-[#9F9F9F]"} rounded-[10px] px-5 outline-none focus:border-black`}
                 />
                 {errors.email && (
                   <span className="text-red-500 text-sm">
@@ -250,7 +250,7 @@ export function Checkout() {
                 <input
                   {...register("additionalInfo")}
                   placeholder="Additional information"
-                  className="border border-[#9F9F9F] rounded-[10px] p-[20px] outline-none focus:border-black placeholder:text-[#9F9F9F]"
+                  className="w-full lg:w-[453px] h-[75px] border border-[#9F9F9F] rounded-[10px] px-5 outline-none focus:border-black placeholder:text-[#9F9F9F]"
                 />
               </div>
             </div>
