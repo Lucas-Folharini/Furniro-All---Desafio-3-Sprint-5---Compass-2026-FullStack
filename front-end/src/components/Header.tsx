@@ -1,26 +1,43 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from "@assets/logo.svg";
 import iconCart from "@assets/iconCart.svg";
 import iconProfile from "@assets/iconProfile.svg";
 import { useCartStore } from "@store/useCartStore";
+import { useAuthStore } from "@store/useAuthStore";
 
 export function Header() {
+  const openSidebar = useCartStore((state) => state.openSidebar);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   const hasCartItems = useCartStore((state) => state.items.length > 0);
+  const { token, logout } = useAuthStore();
+  const navigate = useNavigate();
 
   function closeMenu() {
     setIsMenuOpen(false);
   }
 
+  function handleProfileClick() {
+    if (!token) {
+      navigate("/login");
+    } else {
+      setIsProfileOpen((prev) => !prev);
+    }
+  }
+
+  function handleLogout() {
+    logout();
+    setIsProfileOpen(false);
+    closeMenu();
+  }
+
   return (
     <>
-      <header className="fixed top-0 left-0 z-[999] w-full bg-white transition-all flex justify-center shadow-sm h-[100px]">
+      <header className="fixed top-0 left-0 z-[90] w-full bg-white transition-all flex justify-center shadow-sm h-[100px]">
         <div className="w-full max-w-[1183px] px-5 lg:px-0 flex items-center justify-between h-full">
-          {/* =========================================
-              LOGO
-          ========================================= */}
           <Link
             to="/"
             className="flex flex-1 items-center justify-start relative focus:outline-none"
@@ -36,21 +53,12 @@ export function Header() {
             </span>
           </Link>
 
-          {/* =========================================
-              MENU DESKTOP
-          ========================================= */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-[75px] font-poppins font-medium text-[#000000] text-base">
-            <Link
-              to="/"
-              className="hover:text-[#B88E2F] transition-colors"
-            >
+            <Link to="/" className="hover:text-[#B88E2F] transition-colors">
               Home
             </Link>
 
-            <Link
-              to="/shop"
-              className="hover:text-[#B88E2F] transition-colors"
-            >
+            <Link to="/shop" className="hover:text-[#B88E2F] transition-colors">
               Shop
             </Link>
 
@@ -70,17 +78,32 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* =========================================
-              AÇÕES
-          ========================================= */}
           <div className="flex flex-1 items-center justify-end gap-5 lg:gap-[35px] text-[#000000]">
-            <img
-              src={iconProfile}
-              alt="Perfil"
-              className="w-6 lg:w-auto cursor-pointer hover:opacity-75 transition-opacity"
-            />
+            <div className="relative">
+              <img
+                src={iconProfile}
+                alt="Perfil"
+                onClick={handleProfileClick}
+                className="w-6 lg:w-auto cursor-pointer hover:opacity-75 transition-opacity"
+              />
 
-            <Link to="/cart" className="relative">
+              {token && (
+                <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+              )}
+
+              {isProfileOpen && token && (
+                <div className="absolute right-0 mt-3 w-28 bg-white border border-gray-100 rounded-md shadow-lg flex flex-col z-50">
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-3 text-left hover:bg-gray-50 hover:text-red-500 font-poppins text-sm text-black transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <button onClick={openSidebar} className="relative">
               <img
                 src={iconCart}
                 alt="Carrinho"
@@ -90,11 +113,8 @@ export function Header() {
               {hasCartItems && (
                 <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white" />
               )}
-            </Link>
+            </button>
 
-            {/* =========================================
-                BOTÃO HAMBURGER
-            ========================================= */}
             <button
               onClick={() => setIsMenuOpen(true)}
               className="md:hidden flex items-center justify-center p-1 hover:text-[#B88E2F] transition-colors"
@@ -118,47 +138,30 @@ export function Header() {
         </div>
       </header>
 
-      {/* =========================================
-          OVERLAY
-      ========================================= */}
       <div
         onClick={closeMenu}
-        className={`fixed inset-0 bg-black/40 z-[998] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/40 z-[70] transition-opacity duration-300 md:hidden ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       />
 
-      {/* =========================================
-          MENU MOBILE
-      ========================================= */}
       <aside
-        className={`fixed top-0 right-0 h-screen w-72 bg-white shadow-xl z-[999] transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 h-screen w-72 bg-white shadow-xl z-[90] transition-transform duration-300 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex justify-end p-5">
-          <button
-            onClick={closeMenu}
-            className="text-3xl hover:text-[#B88E2F]"
-          >
+          <button onClick={closeMenu} className="text-3xl hover:text-[#B88E2F]">
             ×
           </button>
         </div>
 
         <nav className="flex flex-col px-8 gap-8 font-poppins text-lg">
-          <Link
-            to="/"
-            onClick={closeMenu}
-            className="hover:text-[#B88E2F]"
-          >
+          <Link to="/" onClick={closeMenu} className="hover:text-[#B88E2F]">
             Home
           </Link>
 
-          <Link
-            to="/shop"
-            onClick={closeMenu}
-            className="hover:text-[#B88E2F]"
-          >
+          <Link to="/shop" onClick={closeMenu} className="hover:text-[#B88E2F]">
             Shop
           </Link>
 
@@ -194,9 +197,22 @@ export function Header() {
             )}
           </Link>
 
-          <button className="text-left hover:text-[#B88E2F]">
-            Profile
-          </button>
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className="text-left hover:text-red-500 transition-colors"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={closeMenu}
+              className="hover:text-[#B88E2F]"
+            >
+              Login / Register
+            </Link>
+          )}
         </nav>
       </aside>
     </>

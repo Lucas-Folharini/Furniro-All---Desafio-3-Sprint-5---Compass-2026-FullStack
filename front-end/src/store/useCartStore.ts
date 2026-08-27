@@ -6,8 +6,11 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
+  isOpen: boolean;
+  openSidebar: () => void;
+  closeSidebar: () => void;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
@@ -16,40 +19,44 @@ interface CartState {
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
+      isOpen: false, 
+      openSidebar: () => set({ isOpen: true }),
+      closeSidebar: () => set({ isOpen: false }),
 
       addItem: (product, quantity = 1) => {
-        const currentItems = get().items;
-        const existingItem = currentItems.find(
-          (item) => item.id === product.id,
-        );
+        set((state) => {
+          const existingItem = state.items.find(
+            (item) => item.id === product.id,
+          );
 
-        if (existingItem) {
-          set({
-            items: currentItems.map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: Math.max(1, quantity)}
-                : item,
-            ),
-          });
-        } else {
-          set({ items: [...currentItems, { ...product, quantity }] });
-        }
+          if (existingItem) {
+            return {
+              items: state.items.map((item) =>
+                item.id === product.id
+                  ? { ...item, quantity: item.quantity + quantity }
+                  : item,
+              ),
+            };
+          } else {
+            return { items: [...state.items, { ...product, quantity }] };
+          }
+        });
       },
 
       removeItem: (productId) => {
-        set({
-          items: get().items.filter((item) => item.id !== productId),
-        });
+        set((state) => ({
+          items: state.items.filter((item) => item.id !== productId),
+        }));
       },
 
       updateQuantity: (productId, quantity) => {
-        set({
-          items: get().items.map((item) =>
+        set((state) => ({
+          items: state.items.map((item) =>
             item.id === productId ? { ...item, quantity } : item,
           ),
-        });
+        }));
       },
 
       clearCart: () => {
@@ -57,7 +64,17 @@ export const useCartStore = create<CartState>()(
       },
     }),
     {
-      name: "shopping-cart-storage", // Nome que ficará no LocalStorage
+      name: "shopping-cart-storage", 
+      partialize: (state) => ({ items: state.items }), 
     },
   ),
 );
+
+
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (event) => {
+    if (event.key === "shopping-cart-storage") {
+      useCartStore.persist.rehydrate();
+    }
+  });
+}

@@ -8,7 +8,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  // Puxa a action da Store para adicionar o item ao carrinho
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link
-      to={`/product/${product.id}`}
+      to={`/shop/${product.id}`}
       className="group relative bg-[#F4F5F7] flex flex-col overflow-hidden cursor-pointer"
     >
       <div className="relative w-full h-[301px]">
