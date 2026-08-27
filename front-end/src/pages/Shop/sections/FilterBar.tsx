@@ -35,9 +35,7 @@ export function FilterBar({
     onViewChange?.(mode);
   };
 
-  const handleShowCountChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleShowCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
 
     if (rawValue === "") {
@@ -55,9 +53,7 @@ export function FilterBar({
     }
   };
 
-  const handleSortChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
     setSortBy(val);
     onSortChange?.(val);
@@ -66,10 +62,7 @@ export function FilterBar({
   return (
     <section className="w-full bg-[#F9F1E7] min-h-[100px] flex items-center justify-center px-3 sm:px-4 lg:px-16 py-4">
       <div className="w-full max-w-[1240px] flex flex-col lg:flex-row items-center justify-between gap-5">
-
-      
         <div className="w-full lg:w-auto flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-5">
-
           <button
             onClick={onFilterClick}
             className="flex items-center gap-2 sm:gap-3 cursor-pointer text-black hover:opacity-75 transition-opacity"
@@ -121,9 +114,7 @@ export function FilterBar({
           </span>
         </div>
 
-      
         <div className="w-full lg:w-auto flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-
           <div className="flex items-center gap-2 sm:gap-4">
             <label
               htmlFor="show-input"
@@ -164,16 +155,10 @@ export function FilterBar({
               className="w-36 sm:w-44 lg:w-[188px] h-12 sm:h-14 bg-white text-[#9F9F9F] font-poppins text-sm sm:text-base lg:text-[20px] px-3 focus:outline-none focus:ring-1 focus:ring-[#B88E2F]"
             >
               <option value="Default">Default</option>
-              <option value="Price: Low to High">
-                Price: Low to High
-              </option>
-              <option value="Price: High to Low">
-                Price: High to Low
-              </option>
-              <option value="Newest">Newest</option>
+              <option value="Price: Low to High">Price: Low to High</option>
+              <option value="Price: High to Low">Price: High to Low</option>
             </select>
           </div>
-
         </div>
       </div>
     </section>

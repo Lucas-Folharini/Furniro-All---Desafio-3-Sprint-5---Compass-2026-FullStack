@@ -6,13 +6,13 @@ import toast from "react-hot-toast";
 import { Banner } from "../../components/PageBanner";
 import { FeaturesSection } from "../../components/FeaturesSection";
 
-import addressIcon from '@assets/adress.svg';
-import phoneIcon from '@assets/phone.svg';
-import clockIcon from '@assets/clock.svg';
+import addressIcon from "@assets/adress.svg";
+import phoneIcon from "@assets/phone.svg";
+import clockIcon from "@assets/clock.svg";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required and must be valid"),
-  email: z.string().email("Please enter a valid email address"),
+  email: z.email("Please enter a valid email address"),
   subject: z.string().optional(),
   message: z.string().optional(),
 });
@@ -65,21 +65,22 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
-        
+        <div className="flex flex-col lg:flex-row justify-center lg:items-start gap-10 lg:gap-32">
+   
           <div className="flex flex-col gap-10 lg:w-[300px]">
-
-         
-            <div className="flex gap-4">
-              <div>
+            <div className="flex items-start gap-6">
+  
+              <div className="w-[30px] flex justify-center flex-shrink-0">
                 <img
                   src={addressIcon}
                   alt="Address"
                   className="w-[22px] h-auto"
                 />
               </div>
-              <div>
-                <h3 className="font-bold text-2xl text-black mb-2">Address</h3>
+              <div className="flex flex-col">
+                <h3 className="font-bold text-2xl text-black mb-2 leading-none">
+                  Address
+                </h3>
                 <p className="text-black text-base leading-relaxed">
                   236 5th SE Avenue, New
                   <br />
@@ -90,14 +91,14 @@ export function Contact() {
               </div>
             </div>
 
-
-        
-            <div className="flex gap-4">
-              <div>
-                <img src={phoneIcon} alt="Phone" className="w-[30px] h-[30px]" />
+            <div className="flex items-start gap-6">
+              <div className="w-[30px] flex justify-center flex-shrink-0">
+                <img src={phoneIcon} alt="Phone" className="w-[30px] h-auto" />
               </div>
-              <div>
-                <h3 className="font-bold text-2xl text-black mb-2">Phone</h3>
+              <div className="flex flex-col">
+                <h3 className="font-bold text-2xl text-black mb-2 leading-none">
+                  Phone
+                </h3>
                 <p className="text-black text-base leading-relaxed">
                   Mobile: +(84) 546-6789
                   <br />
@@ -105,14 +106,13 @@ export function Contact() {
                 </p>
               </div>
             </div>
-  
-         
-            <div className="flex gap-4">
-              <div>
+
+            <div className="flex items-start gap-6">
+              <div className="w-[30px] flex justify-center flex-shrink-0">
                 <img src={clockIcon} alt="Clock" className="w-[23px] h-auto" />
               </div>
-              <div>
-                <h3 className="font-bold text-2xl text-black mb-2">
+              <div className="flex flex-col">
+                <h3 className="font-bold text-2xl text-black mb-2 leading-none">
                   Working Time
                 </h3>
                 <p className="text-black text-base leading-relaxed">
@@ -124,14 +124,15 @@ export function Contact() {
             </div>
           </div>
 
-        
-          <div className="lg:w-[530px] pt-4 lg:pt-0">
+          <div className="w-full lg:w-[530px]">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-9"
             >
               <div className="flex flex-col gap-5">
-                <label className="font-medium text-black">Your name</label>
+                <label className="font-medium text-black leading-none">
+                  Your name
+                </label>
                 <div className="relative">
                   <input
                     {...register("name")}

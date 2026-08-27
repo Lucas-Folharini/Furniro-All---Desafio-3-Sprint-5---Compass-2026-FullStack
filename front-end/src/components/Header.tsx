@@ -38,7 +38,6 @@ export function Header() {
     <>
       <header className="fixed top-0 left-0 z-[90] w-full bg-white transition-all flex justify-center shadow-sm h-[100px]">
         <div className="w-full max-w-[1183px] px-5 lg:px-0 flex items-center justify-between h-full">
-
           <Link
             to="/"
             className="flex flex-1 items-center justify-start relative focus:outline-none"
@@ -88,11 +87,15 @@ export function Header() {
                 className="w-6 lg:w-auto cursor-pointer hover:opacity-75 transition-opacity"
               />
 
+              {token && (
+                <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+              )}
+
               {isProfileOpen && token && (
                 <div className="absolute right-0 mt-3 w-28 bg-white border border-gray-100 rounded-md shadow-lg flex flex-col z-50">
                   <button
                     onClick={handleLogout}
-                    className="px-4 py-3 text-left hover:bg-gray-50 hover:text-[#B88E2F] font-poppins text-sm text-black transition-colors"
+                    className="px-4 py-3 text-left hover:bg-gray-50 hover:text-red-500 font-poppins text-sm text-black transition-colors"
                   >
                     Logout
                   </button>
